@@ -4,6 +4,9 @@ jobs:
   example-job:
     runs-on: ubuntu-latest
     steps:
+      - name: Display the path
+        run: echo $PATH
+        shell: bash
       - name: Run build script
         run: ../scripts/release.sh
         shell: bash

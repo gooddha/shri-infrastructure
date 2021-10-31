@@ -4,4 +4,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:    
       - uses: actions/checkout@v2
-      - run: ./.github/scripts/release.sh
+      - run: ls -l ./.github/scripts/release.sh

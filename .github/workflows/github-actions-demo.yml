@@ -5,6 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run build script
-        run: |
-          bash ./.github/scripts/release.sh
-        shell: bash
+        run: ./.github/scripts/release.sh

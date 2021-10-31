@@ -1,4 +1,5 @@
 #!/bin/bash
+git tag
 
 GIT_VERSION=$(git --version)
 

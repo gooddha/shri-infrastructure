@@ -4,12 +4,8 @@ jobs:
   example-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Display the path
-        run: pwd
-        shell: bash
-      - name: Display files
-        run: ls
-        shell: bash
       - name: Run build script
-        run: ./scripts/release.sh
+        run: |
+          pwd
+          ./scripts/release.sh
         shell: bash

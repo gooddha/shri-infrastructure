@@ -7,5 +7,5 @@ jobs:
       - name: Run build script
         run: |
           pwd
-          ./scripts/release.sh
+          ls
         shell: bash

@@ -1,2 +1,2 @@
 #!/bin/bash
-git tag
+git tag | echo

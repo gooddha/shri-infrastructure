@@ -1,1 +1,2 @@
-echo 'hello from release script'
+#!/bin/bash
+git tag

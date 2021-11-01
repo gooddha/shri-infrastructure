@@ -1,4 +1,8 @@
-on: push
+on: 
+  push:
+    tags:
+      - v*
+
 jobs:  
   example-job:
     runs-on: ubuntu-latest

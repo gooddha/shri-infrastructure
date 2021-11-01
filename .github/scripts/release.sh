@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo Start release publication
 
 TAG_VERSION=$(git tag | tail -n 1);
 

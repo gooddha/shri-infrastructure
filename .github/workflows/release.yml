@@ -1,0 +1,26 @@
+name: release
+on: 
+  push:
+    tags:
+      - v*
+jobs:  
+  release:
+    runs-on: ubuntu-latest
+    steps:          
+      - uses: actions/checkout@v2
+        with:
+          ref: 'master'
+          fetch-depth: 0
+      - run: git checkout ${{ github.ref }}                
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: |
+          npm i
+          ./.github/scripts/release.sh
+        env: 
+          YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
+          YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}    
+          GITHUB_SERVER_URL: ${{ github.GITHUB_SERVER_URL }}
+          GITHUB_REPOSITORY: ${{ github.GITHUB_REPOSITORY }}
+          GITHUB_RUN_ID: ${{ github.GITHUB_RUN_ID }}

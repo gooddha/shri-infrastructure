@@ -1,9 +1,7 @@
 #!/bin/bash
 echo Start release publication
 
-echo $GITHUB_SERVER_URL
-GITHUB_ACTION_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-echo "GitHub is run action : $GITHUB_ACTIONS_URL"
+echo "GitHub is run action : "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
 TAG_VERSION=$(git tag | tail -n 1);
 

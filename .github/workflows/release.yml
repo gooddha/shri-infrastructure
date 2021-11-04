@@ -1,6 +1,7 @@
 name: release
 on: 
   push:
+    commits: 
     tags:
       - v*
   workflow_dispatch:

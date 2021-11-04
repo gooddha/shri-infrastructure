@@ -18,18 +18,15 @@ echo $CHANGELOG
 AUTHOR=$(git show $LAST_TAG | grep Author);
 echo $AUTHOR
 
-CURL_DATA_CREATE_DESCRIPTION="\
+DESCRIPTION="\
 Release version: $LAST_TAG\n\
 $AUTHOR\n\
 Builded on: $GITHUB_ACTIONS_URL\n\
 Changelog:\n\
 $CHANGELOG"
 
-jq --help
-
-
-DATA='{"summary": "Release test", "queue": "TMP"}'
-echo $DATA
+DATA="{\"summary\": \"Test\", \"queue\": \"TMP\", \"description\": \"$DESCRIPTION\"}"
+echo DATA: $DATA
 
 OAUTH="Authorization: OAuth AQAAAAACmEmvAAd5AYEAYatyGkGwgxds0AOn_3M"
 XORG="X-Org-Id: 6461097"

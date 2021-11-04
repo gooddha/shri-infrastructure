@@ -5,11 +5,11 @@ GITHUB_ACTION=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
 echo GitHub is run action : $GITHUB_ACTION;
 
 LAST_TAGS=$(git tag | tail -n 2);
-LAST_TAG=$(echo $LAST_TAGS | awk '{ print $2 }');
 PREV_TAG=$(echo $LAST_TAGS | awk '{ print $1 }');
+LAST_TAG=$(echo $LAST_TAGS | awk '{ print $2 }');
 
-echo Last tag version: $LAST_TAG;
 echo Prev tag version: $PREV_TAG;
+echo Last tag version: $LAST_TAG;
 
 CHANGELOG=$(git log --oneline --decorate $PREV_TAG..$LAST_TAG);
 echo CHANGELOG:
@@ -19,10 +19,10 @@ AUTHOR=$(git show $LAST_TAG | grep Author);
 echo $AUTHOR
 
 DESCRIPTION="\
-Release version: $LAST_TAG\n$AUTHOR\nRun on: $GITHUB_ACTION"
-# \nChangelog:$CHANGELOG"
+Release version: $LAST_TAG\n$AUTHOR\nRun on: $GITHUB_ACTION\nChangelog:\n$CHANGELOG"
+DESCRIPTION=$(echo "$DESCRIPTION" | sed -z 's/\n/\\n/g');
 
-DATA="{\"summary\": \"Test\", \"queue\": \"TMP\", \"description\": \"$DESCRIPTION\"}"
+DATA="{\"summary\": \"Release: $LAST_TAG\", \"queue\": \"TMP\", \"description\": \"$DESCRIPTION\"}"
 echo DATA: $DATA
 
 OAUTH="Authorization: OAuth AQAAAAACmEmvAAd5AYEAYatyGkGwgxds0AOn_3M"
@@ -30,9 +30,6 @@ XORG="X-Org-Id: 6461097"
 HOST='https://api.tracker.yandex.net'
 
 API_RESPONSE1=$(curl -s -X 'POST' -H "$OAUTH" -H "$XORG" -H 'Content-Type: application/json' --data "${DATA}" $HOST/v2/issues/);
-API_RESPONSE2=$(curl -s -X 'GET'  -H "$OAUTH" -H "$XORG" $HOST/v2/myself);
 
 echo API RESPONSE1:
 echo "$API_RESPONSE1"
-echo API RESPONSE2:
-echo "$API_RESPONSE2"

@@ -25,6 +25,8 @@ Builded on: $GITHUB_ACTIONS_URL\n\
 Changelog:\n\
 $CHANGELOG"
 
+jq --help
+
 
 DATA='{"summary": "Release test", "queue": "TMP"}'
 echo $DATA

@@ -12,9 +12,10 @@ echo Last tag version: $LAST_TAG;
 echo Prev tag version: $PREV_TAG;
 
 CHANGELOG=$(git log --oneline --decorate $PREV_TAG..$LAST_TAG);
+echo CHANGELOG:
 echo $CHANGELOG
 
-AUTHOR=$(git show $LAST_TAG | grep Author)
+AUTHOR=$(git show $LAST_TAG | grep Author);
 echo $AUTHOR
 
 CURL_DATA_CREATE_DESCRIPTION="\
@@ -25,25 +26,17 @@ Changelog:\n\
 $CHANGELOG"
 
 
+DATA='{"summary": "Release test", "queue": "TMP"}'
+echo $DATA
 
-DATA_CREATE="{\
-    \"summary\":\"Release $LATEST_TAG\", \
-    \"queue\": \"TMP\", \
-    \"unique\": \"adam-$LATEST_TAG\", \
-    \"description\": \"$CURL_DATA_CREATE_DESCRIPTION\" \
-}"
-
-OAUTH="Authorization: OAuth ${YANDEX_TOKEN}"
-XORG="X-Org-Id: ${YANDEX_XORG_ID}"
+OAUTH="Authorization: OAuth AQAAAAACmEmvAAd5AYEAYatyGkGwgxds0AOn_3M"
+XORG="X-Org-Id: 6461097"
 HOST='https://api.tracker.yandex.net'
 
-API_RESPONSE=$(curl \
-   -s -o /dev/null -w "%{http_code}" \
-   -X 'POST' \
-   -H "$OAUTH"  \
-   -H "$ORG"  \
-   -H 'Content-Type: application/json' \
-   --data "${DATA_CREATE}" \
-  "$HOST"/v2/issues/)
+API_RESPONSE1=$(curl -s -X 'POST' -H "$OAUTH" -H "$XORG" -H 'Content-Type: application/json' --data "${DATA}" $HOST/v2/issues/);
+API_RESPONSE2=$(curl -s -X 'GET'  -H "$OAUTH" -H "$XORG" $HOST/v2/myself);
 
-echo "$API_RESPONSE"
+echo API RESPONSE1:
+echo "$API_RESPONSE1"
+echo API RESPONSE2:
+echo "$API_RESPONSE2"

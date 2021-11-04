@@ -19,11 +19,8 @@ AUTHOR=$(git show $LAST_TAG | grep Author);
 echo $AUTHOR
 
 DESCRIPTION="\
-Release version: $LAST_TAG\n\
-$AUTHOR\n\
-Builded on: $GITHUB_ACTIONS_URL\n\
-Changelog:\n\
-$CHANGELOG"
+Release version: $LAST_TAG\n$AUTHOR\nRun on: $GITHUB_ACTION"
+# \nChangelog:$CHANGELOG"
 
 DATA="{\"summary\": \"Test\", \"queue\": \"TMP\", \"description\": \"$DESCRIPTION\"}"
 echo DATA: $DATA

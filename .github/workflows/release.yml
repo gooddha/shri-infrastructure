@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 16.x
       - run: |
-          npm i
+          # npm i
           ./.github/scripts/release.sh
           ./.github/scripts/build.sh
           ./.github/scripts/tests.sh

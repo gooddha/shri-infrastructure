@@ -18,10 +18,9 @@ jobs:
         with:
           node-version: 16.x
       - run: |
-          # npm i
-          ./.github/scripts/release.sh
+          ./.github/scripts/release.sh          
           ./.github/scripts/build.sh
-          ./.github/scripts/tests.sh
+          ./.github/scripts/test.sh
         env: 
           YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
           YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}    

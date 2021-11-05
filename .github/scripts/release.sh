@@ -1,6 +1,6 @@
 #!/bin/bash
 echo Start release publication...
-
+exit 1;
 GITHUB_ACTION=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
 echo GitHub is run action : $GITHUB_ACTION;
 
@@ -23,8 +23,8 @@ DESCRIPTION="Release version: $LAST_TAG\n$AUTHOR\n$LAST_TAG_DATE\nRun on: $GITHU
 DESCRIPTION=$(echo "$DESCRIPTION" | sed -z 's/\n/\\n/g');
 DATA="{\"summary\": \"Release: $LAST_TAG\", \"queue\": \"TMP\", \"unique\": \"adamovich-$LAST_TAG\", \"description\": \"$DESCRIPTION\"}";
 
-OAUTH="Authorization: OAuth AQAAAAACmEmvAAd5AYEAYatyGkGwgxds0AOn_3M";
-XORG="X-Org-Id: 6461097";
+OAUTH="Authorization: OAuth $YANDEX_TOKEN";
+XORG="X-Org-Id: $YANDEX_XORG_ID";
 HOST='https://api.tracker.yandex.net';
 API_RESPONSE=$(curl -o /dev/null -w "%{http_code}" -s -X 'POST' -H "$OAUTH" -H "$XORG" -H 'Content-Type: application/json' --data "$DATA" $HOST/v2/issues/);
 
@@ -32,7 +32,7 @@ if [ $API_RESPONSE = 201 ]
 then echo "Task successfully created";
 elif [ $API_RESPONSE = 409 ]
 then 
-  echo "Task for realese $LAST_TAG already exist. Searching existing task params..."
+  echo "Task for realese $LAST_TAG already exist."
 
   SEARCH_PARAMS="{ \"filter\": {\"queue\": \"TMP\", \"unique\": \"adamovich-$LAST_TAG\"}}";
   FIND_RESPONSE=$(curl -s -X 'POST' -H "$OAUTH" -H "$XORG" -H 'Content-Type: application/json' --data "$SEARCH_PARAMS" $HOST/v2/issues/_search);
@@ -45,8 +45,12 @@ then
   echo "Existing task URL: https://tracker.yandex.ru/$TASK_QUEUE_KEY"  
   echo "Trying to update existing task..."
 
-  UPDATE_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X 'PATCH' -H "$OAUTH" -H "$XORG" -H 'Content-Type: application/json' --data "$DATA" $HOST/v2/issues/$TASK_ID);
-  if [ $UPDATE_RESPONSE = 200 ]; then echo "Task is successfully updated!"; else echo "Task updating is fail with error: $UPDATE_RESPONSE"; exit 1; fi;
+  UPDATE_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X 'PATCH' -H "$OAUTH" -H "$XORG" -H 'Content-Type: application/json' --data "$DATA" $HOST/v2/issues/1$TASK_ID);
+  if [ $UPDATE_RESPONSE = 200 ]; 
+    then echo "Task is successfully updated!"; 
+    else echo "Task updating is fail with error: $UPDATE_RESPONSE"; 
+    exit 1; 
+  fi;
 
 else 
   echo "Task creating is fail with error: $API_RESPONSE";

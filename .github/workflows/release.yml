@@ -17,10 +17,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16.x
-      - run: ./.github/scripts/release.sh          
         env: 
           YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
           YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}    
           GITHUB_SERVER_URL: ${{ github.GITHUB_SERVER_URL }}
           GITHUB_REPOSITORY: ${{ github.GITHUB_REPOSITORY }}
           GITHUB_RUN_ID: ${{ github.GITHUB_RUN_ID }}
+      - run: ./.github/scripts/release.sh          

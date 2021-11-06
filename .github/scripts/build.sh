@@ -1,13 +1,13 @@
 #!/bin/bash
-echo $?;
-
-if [ $? = 1 ] 
-then 
-  echo "Build is not started because errors on previouse steps"; 
-  exit 1;
-else
-  echo Start release build
-fi
-
+echo Start release build
 echo Install npm modules...
-npm i
+npm install > "/dev/null" 
+
+if [ $? = 0 ]
+  then echo "Npm modules is successfully installed"; 
+else 
+  echo "Npm install is failed"; 
+  exit 1; 
+fi;
+
+echo Creating build artifact

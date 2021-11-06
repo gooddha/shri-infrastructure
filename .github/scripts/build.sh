@@ -1,14 +1,4 @@
 #!/bin/bash
-echo Start release build
-echo Install npm modules...
-npm install > "/dev/null" 
-
-if [ $? = 0 ]
-  then echo "Npm modules is successfully installed"; 
-else 
-  echo "Npm install is failed"; 
-  exit 1; 
-fi;
 
 echo Creating build artifact
 
@@ -35,4 +25,3 @@ if [ $COMMENT_RESPONSE = 201 ]
     echo "Failed to add comment with build result. Status: $COMMENT_RESPONSE"; 
     exit 1; 
 fi;
-

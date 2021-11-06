@@ -61,10 +61,4 @@ else
   exit 1;
 fi
 
-./.github/scripts/build.sh
-echo
-if [ $? = 0 ]
-  then ./.github/scripts/test.sh
-else 
-  exit 1; 
-fi;
+./.github/scripts/test.sh

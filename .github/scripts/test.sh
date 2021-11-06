@@ -7,8 +7,8 @@ TEST_STATUS=$?;
 echo TEST_STATUS $TEST_STATUS;
 
 if [ $TEST_STATUS = 0 ] 
-then TEST_TEXT="All tests passed. Result available here: $GITHUB_ACTION";
-else TEST_TEXT="Some tests failed. Result available here: $GITHUB_ACTION";
+then TEST_TEXT="All tests passed.\nResult available here: $GITHUB_ACTION";
+else TEST_TEXT="Some tests failed.\nResult available here: $GITHUB_ACTION";
 fi;
 
 echo $TEST_TEXT

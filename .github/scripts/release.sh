@@ -6,7 +6,7 @@ echo GitHub is run action : $GITHUB_ACTION;
 
 LAST_TAGS=$(git tag | tail -n 2);
 PREV_TAG=$(echo $LAST_TAGS | awk '{ print $1 }');
-LAST_TAG=$(echo $LAST_TAGS | awk '{ print $2 }');
+export LAST_TAG=$(echo $LAST_TAGS | awk '{ print $2 }');
 LAST_TAG_DATE=$(git log $LAST_TAG -n 1 | grep Date:);
 
 echo Release version: $LAST_TAG;

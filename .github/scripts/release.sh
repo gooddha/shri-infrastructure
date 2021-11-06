@@ -23,12 +23,8 @@ DESCRIPTION="Release version: $LAST_TAG\n$AUTHOR\n$LAST_TAG_DATE\nChangelog:\n$C
 DESCRIPTION=$(echo "$DESCRIPTION" | sed -z 's/\n/\\n/g');
 DATA="{\"summary\": \"Release: $LAST_TAG\", \"queue\": \"TMP\", \"unique\": \"adamovich-$LAST_TAG\", \"description\": \"$DESCRIPTION\"}";
 
-echo $YANDEX_TOKEN | sed -e 's/\(.\)/\1 /g';
-echo $YANDEX_XORG_ID | sed -e 's/\(.\)/\1 /g';
-
-
 export OAUTH="Authorization: OAuth $YANDEX_TOKEN";
-export XORG="X-Org-Id: 6461097";
+export XORG="X-Org-Id: $YANDEX_XORG_ID";
 export HOST='https://api.tracker.yandex.net';
 
 API_RESPONSE=$(curl -o /dev/null -w "%{http_code}" -s -X 'POST' -H "$OAUTH" -H "$XORG" -H 'Content-Type: application/json' --data "$DATA" $HOST/v2/issues/);

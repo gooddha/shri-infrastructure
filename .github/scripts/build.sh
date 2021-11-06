@@ -7,7 +7,7 @@ BUILD_STATUS=$?;
 
 if [ $BUILD_STATUS = 0 ] 
 then BUILD_TEXT="Docker image release:$LAST_TAG successfully created.\nResult available here: $GITHUB_ACTION";
-else BUILD_TEXT="Failed to create docker image.\nResult available here: $GITHUB_ACTION"; echo "Failed to create docker image";
+else echo "Failed to create docker image"; exit 1
 fi;
 
 echo $BUILD_TEXT

@@ -44,6 +44,8 @@ then
   if [ -z $TASK_ID ]; then echo "Error, cant get existing task ID"; exit 1; fi
   if [ -z $TASK_QUEUE_KEY ]; then echo "Error, cant get existing task queue key"; exit 1; fi
 
+
+
   echo "Existing task URL: https://tracker.yandex.ru/$TASK_QUEUE_KEY"  
   echo "Trying to update existing task..."
 
@@ -61,3 +63,5 @@ fi
 
 ./.github/scripts/test.sh
 ./.github/scripts/build.sh
+
+echo "Task in tracker available here: https://tracker.yandex.ru/$TASK_QUEUE_KEY"  

@@ -8,6 +8,16 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:          
+      - name: Test secrets
+        with: # Set the secret as an input
+          YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
+          YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}  
+        env: # Or as an environment variable
+          YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
+          YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}  
+        run: |
+          echo "$YANDEX_TOKEN"
+          echo "$YANDEX_XORG_ID"
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0

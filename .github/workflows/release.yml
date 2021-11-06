@@ -8,26 +8,26 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:          
-      - name: Test secrets
-        # with: # Set the secret as an input
-        #   YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
-        #   YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}  
-        env: # Or as an environment variable
-          YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
-          YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}  
-        run: echo $YANDEX_TOKEN
-      # - uses: actions/checkout@v2
-      #   with:
-      #     fetch-depth: 0
-      # - run: git checkout ${{ github.ref }}                
-      # - uses: actions/setup-node@v1
-      #   with:
-      #     node-version: 16.x
-      # - run: |
-      #    ./.github/scripts/release.sh          
-      #   env: 
+      # - name: Test secrets
+      #   # with: # Set the secret as an input
+      #   #   YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
+      #   #   YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}  
+      #   env: # Or as an environment variable
       #     YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
-      #     YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}    
-      #     GITHUB_SERVER_URL: ${{ github.GITHUB_SERVER_URL }}
-      #     GITHUB_REPOSITORY: ${{ github.GITHUB_REPOSITORY }}
-      #     GITHUB_RUN_ID: ${{ github.GITHUB_RUN_ID }}
+      #     YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}  
+      #   run: echo $YANDEX_TOKEN
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: git checkout ${{ github.ref }}                
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - run: |
+         ./.github/scripts/release.sh          
+        env: 
+          YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
+          YANDEX_XORG_ID: ${{ secrets.YANDEX_ORG_ID }}    
+          GITHUB_SERVER_URL: ${{ github.GITHUB_SERVER_URL }}
+          GITHUB_REPOSITORY: ${{ github.GITHUB_REPOSITORY }}
+          GITHUB_RUN_ID: ${{ github.GITHUB_RUN_ID }}

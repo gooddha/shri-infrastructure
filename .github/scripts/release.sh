@@ -24,10 +24,11 @@ DESCRIPTION=$(echo "$DESCRIPTION" | sed -z 's/\n/\\n/g');
 DATA="{\"summary\": \"Release: $LAST_TAG\", \"queue\": \"TMP\", \"unique\": \"adamovich-$LAST_TAG\", \"description\": \"$DESCRIPTION\"}";
 
 echo "YANDEX_TOKEN $YANDEX_TOKEN" #="AQAAAAACmEmvAAd5AYEAYatyGkGwgxds0AOn_3M";
+
 echo "YANDEX_XORG_ID $YANDEX_XORG_ID" #="6461097";
 
-export OAUTH="Authorization: OAuth $YANDEX_TOKEN";
-export XORG="X-Org-Id: $YANDEX_XORG_ID";
+export OAUTH="Authorization: OAuth AQAAAAACmEmvAAd5AYEAYatyGkGwgxds0AOn_3M";
+export XORG="X-Org-Id: 6461097";
 export HOST='https://api.tracker.yandex.net';
 
 API_RESPONSE=$(curl -o /dev/null -w "%{http_code}" -s -X 'POST' -H "$OAUTH" -H "$XORG" -H 'Content-Type: application/json' --data "$DATA" $HOST/v2/issues/);

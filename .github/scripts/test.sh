@@ -34,8 +34,3 @@ if [ $COMMENT_RESPONSE = 201 ]
     echo "Failed to add comment with tests result. Status: $COMMENT_RESPONSE"; 
     exit 1; 
 fi;
-
-if [ $TEST_STATUS = 0 ] 
-then ./.github/scripts/build.sh
-else exit 1;
-fi;

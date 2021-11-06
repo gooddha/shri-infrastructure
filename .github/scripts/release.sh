@@ -62,3 +62,4 @@ else
 fi
 
 ./.github/scripts/test.sh
+./.github/scripts/build.sh

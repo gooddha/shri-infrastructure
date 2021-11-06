@@ -6,6 +6,6 @@ describe('Another Test Case', () => {
 
 describe('Third Test Case', () => {
   it('Should return 3', () => {
-    expect(1 + 2).toBe(2);
+    expect(1 + 2).toBe(3);
   });
 });

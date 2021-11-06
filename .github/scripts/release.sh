@@ -19,7 +19,7 @@ echo CHANGELOG: $CHANGELOG
 echo 
 
 echo "Sending request to tracker API for create new task..."
-DESCRIPTION="Release version: $LAST_TAG\n$AUTHOR\n$LAST_TAG_DATE\nRun on: $GITHUB_ACTION\nChangelog:\n$CHANGELOG"
+DESCRIPTION="Release version: $LAST_TAG\n$AUTHOR\n$LAST_TAG_DATE\nChangelog:\n$CHANGELOG"
 DESCRIPTION=$(echo "$DESCRIPTION" | sed -z 's/\n/\\n/g');
 DATA="{\"summary\": \"Release: $LAST_TAG\", \"queue\": \"TMP\", \"unique\": \"adamovich-$LAST_TAG\", \"description\": \"$DESCRIPTION\"}";
 
@@ -62,6 +62,7 @@ else
 fi
 
 ./.github/scripts/build.sh
+echo
 if [ $? = 0 ]
   then ./.github/scripts/test.sh
 else 

@@ -27,7 +27,7 @@ echo $YANDEX_TOKEN | sed -e 's/\(.\)/\1 /g';
 echo $YANDEX_XORG_ID | sed -e 's/\(.\)/\1 /g';
 
 
-export OAUTH="Authorization: OAuth AQAAAAACmEmvAAd5AYEAYatyGkGwgxds0AOn_3M";
+export OAUTH="Authorization: OAuth $YANDEX_TOKEN";
 export XORG="X-Org-Id: 6461097";
 export HOST='https://api.tracker.yandex.net';
 
